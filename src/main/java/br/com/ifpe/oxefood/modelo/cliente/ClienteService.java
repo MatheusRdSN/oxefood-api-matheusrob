@@ -6,12 +6,11 @@ import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 
 @Service
-
 public class ClienteService {
-    @Autowired
+    @Autowired //cria instâncias automaticamente
    private ClienteRepository repository;
 
-   @Transactional
+   @Transactional //orgazina
    public Cliente save(Cliente cliente) {
 
        cliente.setHabilitado(Boolean.TRUE);
