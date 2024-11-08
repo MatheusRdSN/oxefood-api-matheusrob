@@ -22,7 +22,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Cliente extends EntidadeAuditavel  {
-  
+
    @Column
    private String nome;
 
@@ -37,6 +37,11 @@ public class Cliente extends EntidadeAuditavel  {
 
    @Column
    private String foneFixo;
+
+
+
+  
+   
 
 
 }
