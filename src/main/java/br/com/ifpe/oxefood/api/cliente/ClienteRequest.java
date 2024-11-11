@@ -31,8 +31,8 @@ public class ClienteRequest {
 
        return Cliente.builder()
            .nome(nome)
-           .dataNascimento(dataNascimento)
            .cpf(cpf)
+           .dataNascimento(dataNascimento) 
            .foneCelular(foneCelular)
            .foneFixo(foneFixo)
            .build();
