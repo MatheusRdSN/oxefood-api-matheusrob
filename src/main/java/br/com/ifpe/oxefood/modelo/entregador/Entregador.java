@@ -26,50 +26,50 @@ public class Entregador extends EntidadeAuditavel {
 
     @Column
     private String nome;
- 
+
     @Column
     private String cpf;
- 
+
     @Column
     private String rg;
- 
+
     @Column
     private LocalDate dataNascimento;
- 
-    @Column
-    private Integer qtdEntregasRealizadas;
- 
-    @Column
-    private double valorFrete;
- 
-    @Column
-    private String enderecoRua;
- 
-    @Column
-    private String enderecoComplemento;
- 
-    @Column
-    private String enderecoNumero;
- 
-    @Column
-    private String enderecoBairro;
- 
-    @Column
-    private String enderecoCidade;
- 
-    @Column
-    private String enderecoCep;
- 
-    @Column
-    private String enderecoUf;
- 
-    @Column
-    private boolean ativo;
- 
+
     @Column
     private String foneCelular;
- 
+
     @Column
     private String foneFixo;
+
+    @Column
+    private Integer qtdEntregasRealizadas;
+
+    @Column
+    private double valorFrete;
+
+    @Column
+    private String enderecoRua;
+
+    @Column
+    private String enderecoComplemento;
+
+    @Column
+    private String enderecoNumero;
+
+    @Column
+    private String enderecoBairro;
+
+    @Column
+    private String enderecoCidade;
+
+    @Column
+    private String enderecoCep;
+
+    @Column
+    private String enderecoUf;
+
+    @Column
+    private boolean ativo;
 
 }

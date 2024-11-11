@@ -1,4 +1,4 @@
-package br.com.ifpe.oxefood.api.produto; 
+package br.com.ifpe.oxefood.api.produto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,20 +12,19 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.ifpe.oxefood.modelo.produto.Produto;
 import br.com.ifpe.oxefood.modelo.produto.ProdutoService;
 
-@RestController //determina que essa classe e do tipo Rest
-@RequestMapping("/api/produto") //DETERMINA A URL para acesar as funçoes essa classe
-@CrossOrigin //recber requisiçoes javascript
+@RestController // determina que essa classe e do tipo Rest
+@RequestMapping("/api/produto") // DETERMINA A URL para acesar as funçoes essa classe
+@CrossOrigin // recber requisiçoes javascript
 
-//DEFINE AS ROTAS PARA PRODUTO
-public class ProdutoController {  
+public class ProdutoController {
 
-   @Autowired
-   private ProdutoService produtoService;
+    @Autowired
+    private ProdutoService produtoService;
 
-   @PostMapping //pra acessar essa funçao tem que fazer requisiçoes POST
-   public ResponseEntity<Produto> save(@RequestBody ProdutoRequest request) {
+    @PostMapping // pra acessar essa funçao tem que fazer requisiçoes POST
+    public ResponseEntity<Produto> save(@RequestBody ProdutoRequest request) {
 
-    Produto produto = produtoService.save(request.build());
-       return new ResponseEntity<Produto>(produto, HttpStatus.CREATED);
-   }
+        Produto produto = produtoService.save(request.build());
+        return new ResponseEntity<Produto>(produto, HttpStatus.CREATED);
+    }
 }

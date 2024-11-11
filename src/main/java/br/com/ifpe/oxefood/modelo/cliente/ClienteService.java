@@ -7,14 +7,14 @@ import jakarta.transaction.Transactional;
 
 @Service
 public class ClienteService {
-    @Autowired //cria instâncias automaticamente
-   private ClienteRepository repository;
+    @Autowired // cria instâncias automaticamente
+    private ClienteRepository repository;
 
-   @Transactional //orgazina
-   public Cliente save(Cliente cliente) {
+    @Transactional // orgazina
+    public Cliente save(Cliente cliente) {
 
-       cliente.setHabilitado(Boolean.TRUE);
-       return repository.save(cliente);
-   }
+        cliente.setHabilitado(Boolean.TRUE);
+        return repository.save(cliente);
+    }
 
 }
