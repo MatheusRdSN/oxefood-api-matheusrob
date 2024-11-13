@@ -3,6 +3,9 @@ package br.com.ifpe.oxefood.modelo.cliente;
 import java.time.LocalDate;
 
 import org.hibernate.annotations.SQLRestriction;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import br.com.ifpe.oxefood.util.entity.EntidadeAuditavel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,12 +24,13 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cliente extends EntidadeAuditavel  {
+public class Cliente extends EntidadeAuditavel {
 
    @Column
    private String nome;
 
    @Column
+   @JsonFormat(pattern = "dd/MM/yyyy")
    private LocalDate dataNascimento;
 
    @Column
@@ -38,11 +42,4 @@ public class Cliente extends EntidadeAuditavel  {
    @Column
    private String foneFixo;
 
-
-
-  
-   
-
-
 }
-
