@@ -74,6 +74,6 @@ public class Entregador extends EntidadeAuditavel {
     private String enderecoUf;
 
     @Column
-    private boolean ativo;
+    private Boolean ativo;
 
 }
