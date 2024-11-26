@@ -47,7 +47,7 @@ public class EntregadorRequest {
  
     private String enderecoUf;
  
-    private boolean ativo;
+    private Boolean ativo;
  
     public Entregador build() {
 
