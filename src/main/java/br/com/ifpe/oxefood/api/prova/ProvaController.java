@@ -34,7 +34,7 @@ public class ProvaController {
     }
 
     @GetMapping
-    public List<Prova> listaProvarTodos() {
+    public List<Prova> listaTodos() {
         return provaService.listarTodos();
     }
 
