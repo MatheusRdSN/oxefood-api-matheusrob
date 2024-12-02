@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ifpe.oxefood.modelo.cliente.Cliente;
 import br.com.ifpe.oxefood.modelo.cliente.ClienteService;
+import jakarta.validation.Valid;
 
 @RestController //determina que essa classe e do tipo Rest
 @RequestMapping("/api/cliente") //DETERMINA A URL para acesar as funçoes essa classe
@@ -29,7 +30,7 @@ public class ClienteController {
    private ClienteService clienteService;
 
    @PostMapping //pra acessar essa funçao tem que fazer requisiçoes POST
-   public ResponseEntity<Cliente> save(@RequestBody ClienteRequest request) {
+   public ResponseEntity<Cliente> save(@RequestBody @Valid ClienteRequest request) {
 
        Cliente cliente = clienteService.save(request.build());
        return new ResponseEntity<Cliente>(cliente, HttpStatus.CREATED);

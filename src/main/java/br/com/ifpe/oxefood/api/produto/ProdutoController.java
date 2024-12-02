@@ -30,8 +30,11 @@ public class ProdutoController {
     @PostMapping // pra acessar essa funçao tem que fazer requisiçoes POST
     public ResponseEntity<Produto> save(@RequestBody ProdutoRequest request) {
 
-        Produto produto = produtoService.save(request.build());
+
+            Produto produto = produtoService.save(request.build());
         return new ResponseEntity<Produto>(produto, HttpStatus.CREATED);
+        
+        
     }
 
            @GetMapping

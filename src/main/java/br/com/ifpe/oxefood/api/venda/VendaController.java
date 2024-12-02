@@ -1,4 +1,4 @@
-package br.com.ifpe.oxefood.api.prova;
+package br.com.ifpe.oxefood.api.venda;
 
 import java.util.List;
 
@@ -15,45 +15,45 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.ifpe.oxefood.modelo.prova.Prova;
-import br.com.ifpe.oxefood.modelo.prova.ProvaService;
+import br.com.ifpe.oxefood.modelo.venda.Venda;
+import br.com.ifpe.oxefood.modelo.venda.VendaService;
 
 @RestController // determina que essa classe e do tipo Rest
-@RequestMapping("/api/prova") // DETERMINA A URL para acesar as funçoes essa classe
+@RequestMapping("/api/venda") // DETERMINA A URL para acesar as funçoes essa classe
 @CrossOrigin // recber requisiçoes javascript
 
-public class ProvaController {
+public class VendaController {
     @Autowired
-    private ProvaService provaService;
+    private VendaService vendaService;
 
     @PostMapping // pra acessar essa funçao tem que fazer requisiçoes POST
-    public ResponseEntity<Prova> save(@RequestBody ProvaRequest request) {
+    public ResponseEntity<Venda> save(@RequestBody VendaRequest request) {
 
-        Prova prova = provaService.save(request.build());
-        return new ResponseEntity<Prova>(prova, HttpStatus.CREATED);
+        Venda venda = vendaService.save(request.build());
+        return new ResponseEntity<Venda>(venda, HttpStatus.CREATED);
     }
 
     @GetMapping
-    public List<Prova> listaTodos() {
-        return provaService.listarTodos();
+    public List<Venda> listaTodos() {
+        return vendaService.listarTodos();
     }
 
     @GetMapping("/{id}")
-    public Prova obterPorID(@PathVariable Long id) {
-        return provaService.obterPorID(id);
+    public Venda obterPorID(@PathVariable Long id) {
+        return vendaService.obterPorID(id);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Prova> update(@PathVariable("id") Long id, @RequestBody ProvaRequest request) {
+    public ResponseEntity<Venda> update(@PathVariable("id") Long id, @RequestBody VendaRequest request) {
 
-        provaService.update(id, request.build());
+        vendaService.update(id, request.build());
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
 
-        provaService.delete(id);
+        vendaService.delete(id);
         return ResponseEntity.ok().build();
     }
 
