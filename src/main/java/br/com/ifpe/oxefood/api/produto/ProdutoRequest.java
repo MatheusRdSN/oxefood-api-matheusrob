@@ -1,5 +1,9 @@
 package br.com.ifpe.oxefood.api.produto;
 
+import jakarta.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.Length;
+
 import br.com.ifpe.oxefood.modelo.produto.Produto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,6 +22,8 @@ public class ProdutoRequest {
 
     private String descricao;
 
+    @NotBlank(message = "O Valor é de preenchimento obrigatório")
+    @Length(min = 3, message = "O valor deverá ser no mínimo de 100 reais.")
     private double valorUnitario;
 
     private Integer tempoEntregaMinimo;

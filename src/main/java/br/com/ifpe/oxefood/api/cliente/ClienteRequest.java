@@ -16,7 +16,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data //Mesma coisa que getters e setters juntos.
+@Data // Mesma coisa que getters e setters juntos.
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,30 +25,29 @@ public class ClienteRequest {
     @NotNull(message = "O Nome é de preenchimento obrigatório")
     @NotEmpty(message = "O Nome é de preenchimento obrigatório")
     @Length(max = 100, message = "O Nome deverá ter no máximo {max} caracteres")
-   private String nome;
+    private String nome;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
-   private LocalDate dataNascimento;
+    private LocalDate dataNascimento;
 
     @NotBlank(message = "O CPF é de preenchimento obrigatório")
     @CPF
-   private String cpf;
+    private String cpf;
 
     @Length(min = 8, max = 20, message = "O campo Fone tem que ter entre {min} e {max} caracteres")
-   private String foneCelular;
+    private String foneCelular;
 
-   private String foneFixo;
+    private String foneFixo;
 
-   public Cliente build() {
+    public Cliente build() {
 
-       return Cliente.builder()
-           .nome(nome)
-           .cpf(cpf)
-           .dataNascimento(dataNascimento) 
-           .foneCelular(foneCelular)
-           .foneFixo(foneFixo)
-           .build();
-   }
+        return Cliente.builder()
+                .nome(nome)
+                .cpf(cpf)
+                .dataNascimento(dataNascimento)
+                .foneCelular(foneCelular)
+                .foneFixo(foneFixo)
+                .build();
+    }
 
 }
-
