@@ -11,7 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
+@Entity     
 @Table(name = "Produto")
 @SQLRestriction("habilitado = true")
 @Builder
@@ -30,7 +30,7 @@ public class Produto extends EntidadeAuditavel {
    @Column
    private String descricao;
 
-   @Column
+   @Column(nullable = false)
    private double valorUnitario;
 
    @Column

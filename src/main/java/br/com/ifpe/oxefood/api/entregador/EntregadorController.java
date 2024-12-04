@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ifpe.oxefood.modelo.entregador.Entregador;
 import br.com.ifpe.oxefood.modelo.entregador.EntregadorService;
+import jakarta.validation.Valid;
 
 @RestController //determina que essa classe e do tipo Rest
 @RequestMapping("/api/entregador") //DETERMINA A URL para acesar as funçoes essa classe
@@ -30,7 +31,7 @@ public class EntregadorController {
    private EntregadorService entregadorService;
 
    @PostMapping //pra acessar essa funçao tem que fazer requisiçoes POST
-   public ResponseEntity<Entregador> save(@RequestBody EntregadorRequest request) {
+   public ResponseEntity<Entregador> save(@RequestBody @Valid EntregadorRequest request) {
 
     Entregador entregador = entregadorService.save(request.build());
        return new ResponseEntity<Entregador>(entregador, HttpStatus.CREATED);

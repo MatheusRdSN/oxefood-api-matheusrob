@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.ifpe.oxefood.modelo.entregador.Entregador;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,6 +26,7 @@ public class EntregadorRequest {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataNascimento;
 
+    @Pattern(regexp = "^81\\d{9}$", message = "O número de celular deve começar com o prefixo 81 e conter 11 dígitos no total.")
     private String foneCelular;
  
     private String foneFixo;

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.ifpe.oxefood.util.exception.ClienteException;
+
 import jakarta.transaction.Transactional;
 
 @Service
@@ -16,7 +17,7 @@ public class ClienteService {
     @Transactional // orgazina
     public Cliente save(Cliente cliente) {
 
-        if (!cliente.getFoneCelular().startsWith("81") || !cliente.getFoneFixo().startsWith("81")){
+        if (!isValidFoneCelular(cliente.getFoneCelular())){
             throw new ClienteException(ClienteException.MSG_PREFIXO_CLIENTE);
         }
 
@@ -36,6 +37,10 @@ public class ClienteService {
 
     @Transactional
     public void update(Long id, Cliente clienteAlterado) {
+
+        if (!isValidFoneCelular(clienteAlterado.getFoneCelular())){
+            throw new ClienteException(ClienteException.MSG_PREFIXO_CLIENTE);
+        }
  
        Cliente cliente = repository.findById(id).get();
        cliente.setNome(clienteAlterado.getNome());
@@ -56,6 +61,9 @@ public class ClienteService {
        repository.save(cliente);
    }
 
-
+   private boolean isValidFoneCelular(String foneCelular) {
+    // Verifica se o número de celular começa com "81" e tem 11 dígitos no total
+    return foneCelular != null && foneCelular.matches("^81\\d{9}$");
+}
 
 }

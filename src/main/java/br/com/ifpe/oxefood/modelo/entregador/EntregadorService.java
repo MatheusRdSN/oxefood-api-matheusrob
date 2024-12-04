@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import br.com.ifpe.oxefood.util.exception.EntregadorException;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -15,6 +17,10 @@ public class EntregadorService {
  
     @Transactional //orgazina
     public Entregador save(Entregador entregador) {
+
+        if (!isValidFoneCelular(entregador.getFoneCelular())) {
+            throw new EntregadorException(EntregadorException.MSG_PREFIXO_ENTREGADOR);
+        }
  
          entregador.setHabilitado(Boolean.TRUE);
         return repository.save(entregador);
@@ -32,6 +38,10 @@ public class EntregadorService {
 
     @Transactional
     public void update(Long id, Entregador entregadorAlterado) {
+
+        if (!isValidFoneCelular(entregadorAlterado.getFoneCelular())) {
+            throw new EntregadorException(EntregadorException.MSG_PREFIXO_ENTREGADOR);
+        }
         // Buscar o entregador no repositório
         Entregador entregador = repository.findById(id).get();
         // Atualizar os atributos do entregador com os valores do entregadorAlterado
@@ -63,5 +73,11 @@ public class EntregadorService {
 
        repository.save(entregador);
    }
+
+    // Método auxiliar para verificar se o número de celular é válido
+    private boolean isValidFoneCelular(String foneCelular) {
+        // Verifica se o número de celular começa com "81" e tem 11 dígitos no total
+        return foneCelular != null && foneCelular.matches("^81\\d{9}$");
+    }
 
 }

@@ -11,6 +11,7 @@ import br.com.ifpe.oxefood.modelo.cliente.Cliente;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -34,7 +35,7 @@ public class ClienteRequest {
     @CPF
     private String cpf;
 
-    @Length(min = 8, max = 20, message = "O campo Fone tem que ter entre {min} e {max} caracteres")
+       @Pattern(regexp = "^81\\d{9}$", message = "O número de celular deve começar com o prefixo 81 e conter 11 dígitos no total.")
     private String foneCelular;
 
     private String foneFixo;
