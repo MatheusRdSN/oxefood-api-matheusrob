@@ -17,13 +17,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ProdutoRequest {
 
+    private Long idCategoria;
+
     private String codigo;
 
     private String titulo;
 
     private String descricao;
 
-   @NotBlank(message = "O Valor é de preenchimento obrigatório")
+    @NotBlank(message = "O Valor é de preenchimento obrigatório")
     @Min(value = 20, message = "O valor unitário deve ser no mínimo 20")
     @Max(value = 100, message = "O valor unitário deve ser no máximo 100")
     private Double valorUnitario;
