@@ -35,7 +35,7 @@ public class ClienteRequest {
     @CPF
     private String cpf;
 
-       @Pattern(regexp = "^81\\d{9}$", message = "O número de celular deve começar com o prefixo 81 e conter 11 dígitos no total.")
+    @Pattern(regexp = "^81\\d{11}$", message = "O número de celular deve começar com o prefixo 81 e conter 11 dígitos no total.")
     private String foneCelular;
 
     private String foneFixo;

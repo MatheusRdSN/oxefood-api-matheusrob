@@ -1,5 +1,6 @@
 package br.com.ifpe.oxefood.modelo.cliente;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,9 @@ import jakarta.transaction.Transactional;
 public class ClienteService {
     @Autowired // cria instâncias automaticamente
     private ClienteRepository repository;
+
+    @Autowired // cria instâncias automaticamente
+    private EnderecoClienteRepository enderecoClienteRepository;
 
     @Transactional // orgazina
     public Cliente save(Cliente cliente) {
@@ -63,7 +67,63 @@ public class ClienteService {
 
    private boolean isValidFoneCelular(String foneCelular) {
     // Verifica se o número de celular começa com "81" e tem 11 dígitos no total
-    return foneCelular != null && foneCelular.matches("^81\\d{9}$");
+    return foneCelular != null && foneCelular.matches("^81\\d{11}$");
 }
+
+
+ @Transactional
+   public EnderecoCliente adicionarEnderecoCliente(Long clienteId, EnderecoCliente endereco) {
+
+       Cliente cliente = this.obterPorID(clienteId);
+      
+       //Primeiro salva o EnderecoCliente:
+
+       endereco.setCliente(cliente);
+       endereco.setHabilitado(Boolean.TRUE);
+       enderecoClienteRepository.save(endereco);
+      
+       //Depois acrescenta o endereço criado ao cliente e atualiza o cliente:
+
+       List<EnderecoCliente> listaEnderecoCliente = cliente.getEnderecos();
+      
+       if (listaEnderecoCliente == null) {
+           listaEnderecoCliente = new ArrayList<EnderecoCliente>();
+       }
+      
+       listaEnderecoCliente.add(endereco);
+       cliente.setEnderecos(listaEnderecoCliente);
+       repository.save(cliente);
+      
+       return endereco;
+    }
+
+    @Transactional
+    public EnderecoCliente atualizarEnderecoCliente(Long id, EnderecoCliente enderecoAlterado) {
+ 
+        EnderecoCliente endereco = enderecoClienteRepository.findById(id).get();
+        endereco.setRua(enderecoAlterado.getRua());
+        endereco.setNumero(enderecoAlterado.getNumero());
+        endereco.setBairro(enderecoAlterado.getBairro());
+        endereco.setCep(enderecoAlterado.getCep());
+        endereco.setCidade(enderecoAlterado.getCidade());
+        endereco.setEstado(enderecoAlterado.getEstado());
+        endereco.setComplemento(enderecoAlterado.getComplemento());
+ 
+        return enderecoClienteRepository.save(endereco);
+    }
+
+    @Transactional
+    public void removerEnderecoCliente(Long idEndereco) {
+ 
+        EnderecoCliente endereco = enderecoClienteRepository.findById(idEndereco).get();
+        endereco.setHabilitado(Boolean.FALSE);
+        enderecoClienteRepository.save(endereco);
+ 
+        Cliente cliente = this.obterPorID(endereco.getCliente().getId());
+        cliente.getEnderecos().remove(endereco);
+        repository.save(cliente);
+    }
+ 
+ 
 
 }

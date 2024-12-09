@@ -9,22 +9,29 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import br.com.ifpe.oxefood.util.entity.EntidadeAuditavel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.util.List;
 
-@Entity
-@Table(name = "Cliente")
-@SQLRestriction("habilitado = true")
-@Builder
+
+@Entity // Entidade do banco de dados.
+@Table(name = "Cliente") // Nome da tabela no banco de dados.
+@SQLRestriction("habilitado = true") // Restrição para mostrar apenas os clientes habilitados.
+@Builder // Cria um objeto Cliente.
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@AllArgsConstructor // Cria um construtor com todos os atributos.
+@NoArgsConstructor // Cria um construtor vazio.
 public class Cliente extends EntidadeAuditavel {
+
+   @OneToMany(mappedBy = "cliente", orphanRemoval = true, fetch = FetchType.EAGER) // EAGER carrega todos os endereços do cliente e LAZY carrega apenas o cliente sem o endereço.
+   private List<EnderecoCliente> enderecos; // Lista de endereços do cliente.
 
    @Column (nullable = false, length = 100)
    private String nome;
