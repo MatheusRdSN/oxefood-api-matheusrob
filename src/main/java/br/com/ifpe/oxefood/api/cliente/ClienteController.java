@@ -21,7 +21,7 @@ import br.com.ifpe.oxefood.modelo.cliente.EnderecoCliente;
 import jakarta.validation.Valid;
 
 @RestController //determina que essa classe e do tipo Rest
-@RequestMapping("/api/cliente") //DETERMINA A URL para acesar as funçoes essa classe
+@RequestMapping("/api/cliente") //DETERMINA A URL para acesar as funçoes dessa classe
 @CrossOrigin //recber requisiçoes javascript
 
 //DEFINE AS ROTAS PARA CLIENTE
