@@ -66,8 +66,8 @@ public class ClienteService {
    }
 
    private boolean isValidFoneCelular(String foneCelular) {
-    // Verifica se o número de celular começa com "81" e tem 11 dígitos no total
-    return foneCelular != null && foneCelular.matches("^81\\d{11}$");
+    // Verifica se o número de celular começa com "81"
+    return foneCelular != null && foneCelular.startsWith("81");
 }
 
 

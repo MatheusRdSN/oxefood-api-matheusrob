@@ -8,10 +8,10 @@ import org.hibernate.validator.constraints.br.CPF;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.ifpe.oxefood.modelo.cliente.Cliente;
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,10 +35,15 @@ public class ClienteRequest {
     @CPF
     private String cpf;
 
-    @Pattern(regexp = "^81\\d{11}$", message = "O número de celular deve começar com o prefixo 81 e conter 11 dígitos no total.")
     private String foneCelular;
 
     private String foneFixo;
+
+      @AssertTrue(message = "O número de celular deve começar com o prefixo 81.")
+    public boolean isFoneCelularValido() {
+        // Verifica se o número de celular não é nulo e começa com "81"
+        return foneCelular != null && foneCelular.startsWith("81");
+    }
 
     public Cliente build() {
 
