@@ -6,17 +6,23 @@ import org.hibernate.annotations.SQLRestriction;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import br.com.ifpe.oxefood.modelo.acesso.Usuario;
 import br.com.ifpe.oxefood.util.entity.EntidadeAuditavel;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import java.util.List;
 
 
@@ -30,7 +36,13 @@ import java.util.List;
 @NoArgsConstructor // Cria um construtor vazio.
 public class Cliente extends EntidadeAuditavel {
 
+   @OneToOne
+   @JoinColumn(nullable = false)
+   private Usuario usuario;
+
+
    @OneToMany(mappedBy = "cliente", orphanRemoval = true, fetch = FetchType.EAGER) // EAGER carrega todos os endereços do cliente e LAZY carrega apenas o cliente sem o endereço.
+   @Fetch(FetchMode.SUBSELECT) // Carrega todos os endereços do cliente.
    private List<EnderecoCliente> enderecos; // Lista de endereços do cliente.
 
    @Column (nullable = false, length = 100)
