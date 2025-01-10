@@ -16,6 +16,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import br.com.ifpe.oxefood.modelo.acesso.Perfil;
 import br.com.ifpe.oxefood.modelo.acesso.Usuario;
 import br.com.ifpe.oxefood.modelo.seguranca.JwtAuthenticationFilter;
 
@@ -40,11 +41,32 @@ public class SecurityConfiguration {
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(c -> c.disable())
             .authorizeHttpRequests(authorize -> authorize
+            // .permitAll() permite acesso a todos os endpoints, sem necessidade de autenticação
+            // .hasAnyAuthority() permite acesso a endpoints que possuem a autorização especificada
+            
 
                 .requestMatchers(HttpMethod.POST, "/api/cliente").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/funcionario").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/auth").permitAll()
                 // caso uma rota receba parametros como /api/cliente/{id}, o uso de * é necessário, ficando: /api/cliente/*
                 // pode permitir rotas do mesmo tipo de requisição em uma mesma linha de codigo, como "/api/cliente", "/api/cproduto/*"
+
+                .requestMatchers(HttpMethod.GET, "/api/produto/").hasAnyAuthority(
+                   Perfil.ROLE_CLIENTE,
+                   Perfil.ROLE_FUNCIONARIO_ADMIN,
+                   Perfil.ROLE_FUNCIONARIO_USER) //Consulta de produto
+
+               .requestMatchers(HttpMethod.POST, "/api/produto").hasAnyAuthority(
+                   Perfil.ROLE_FUNCIONARIO_ADMIN,
+                   Perfil.ROLE_FUNCIONARIO_USER) //Cadastro de produto
+
+               .requestMatchers(HttpMethod.PUT, "/api/produto/*").hasAnyAuthority(
+                   Perfil.ROLE_FUNCIONARIO_ADMIN,
+                   Perfil.ROLE_FUNCIONARIO_USER) //Alteração de produto
+                  
+               .requestMatchers(HttpMethod.DELETE, "/api/produto/*").hasAnyAuthority(
+                   Perfil.ROLE_FUNCIONARIO_ADMIN) //Exclusão de produto
+
 
                 .requestMatchers(HttpMethod.GET, "/api-docs/*").permitAll()
                 .requestMatchers(HttpMethod.GET, "/swagger-ui/*").permitAll()
