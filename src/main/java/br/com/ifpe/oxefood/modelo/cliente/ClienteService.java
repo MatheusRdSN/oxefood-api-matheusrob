@@ -10,6 +10,7 @@ import br.com.ifpe.oxefood.modelo.acesso.Perfil;
 import br.com.ifpe.oxefood.modelo.acesso.PerfilRepository;
 import br.com.ifpe.oxefood.modelo.acesso.Usuario;
 import br.com.ifpe.oxefood.modelo.acesso.UsuarioService;
+import br.com.ifpe.oxefood.modelo.mensagens.EmailService;
 import br.com.ifpe.oxefood.util.exception.ClienteException;
 
 import jakarta.transaction.Transactional;
@@ -28,24 +29,33 @@ public class ClienteService {
    @Autowired
    private PerfilRepository perfilUsuarioRepository;
 
+   @Autowired
+    private EmailService emailService;
+
+
 
     @Transactional // orgazina
     public Cliente save(Cliente cliente, Usuario usuarioLogado) {
 
          usuarioService.save(cliente.getUsuario());
 
-      for (Perfil perfil : cliente.getUsuario().getRoles()) {
+        for (Perfil perfil : cliente.getUsuario().getRoles()) {
            perfil.setHabilitado(Boolean.TRUE);
            cliente.setCriadoPor(usuarioLogado);
            perfilUsuarioRepository.save(perfil);
-      }
+         }
 
         if (!isValidFoneCelular(cliente.getFoneCelular())){
             throw new ClienteException(ClienteException.MSG_PREFIXO_CLIENTE);
         }
 
         cliente.setHabilitado(Boolean.TRUE);
-        return repository.save(cliente);
+        Cliente clienteSalvo = repository.save(cliente);
+
+        emailService.enviarEmailConfirmacaoCadastroCliente(clienteSalvo);
+
+        return clienteSalvo;
+
     }
 
     public List<Cliente> listarTodos() {
