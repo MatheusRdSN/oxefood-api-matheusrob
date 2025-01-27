@@ -21,6 +21,12 @@ import br.com.ifpe.oxefood.modelo.produto.Produto;
 import br.com.ifpe.oxefood.modelo.produto.ProdutoService;
 import jakarta.validation.Valid;
 
+import io.swagger.v3.oas.annotations.Operation;
+
+@Tag(
+    name = "API Produto",
+    description = "API responsável pelos servidos de Produto no sistema"
+)
 @RestController // determina que essa classe e do tipo Rest
 @RequestMapping("/api/produto") // DETERMINA A URL para acesar as funçoes essa classe
 @CrossOrigin // recber requisiçoes javascript
@@ -34,6 +40,10 @@ public class ProdutoController {
    private CategoriaProdutoService categoriaProdutoService;
 
 
+    @Operation(
+        summary = "Cadastrar Produto",
+        description = "Realiza o cadastro de um novo Produto"
+    )
     @PostMapping // pra acessar essa funçao tem que fazer requisiçoes POST
     public ResponseEntity<Produto> save(@RequestBody @Valid ProdutoRequest request) {
 
@@ -46,16 +56,29 @@ public class ProdutoController {
         
     }
 
-           @GetMapping
+
+    @Operation(
+        summary = "Listar todos os Produtos",
+        description = "Retorna uma lista com todos os Produtos cadastrados"
+    )
+    @GetMapping
     public List<Produto> listarTodos() {
         return produtoService.listarTodos();
     }
 
+    @Operation(
+        summary = "Obter Produto por ID",
+        description = "Retorna o Produto cadastrado com o ID informado"
+    )
     @GetMapping("/{id}")
     public Produto obterPorID(@PathVariable Long id) {
         return produtoService.obterPorID(id);
     }
 
+
+    @Operation(
+        summary = "Atualizar Produto",
+        description = "Realiza a atualização do Produto cadastrado com o ID informado")
      @PutMapping("/{id}")
  public ResponseEntity<Produto> update(@PathVariable("id") Long id, @RequestBody ProdutoRequest request) {
 
@@ -65,6 +88,12 @@ public class ProdutoController {
        return ResponseEntity.ok().build();
  }
 
+
+
+    @Operation(
+        summary = "Deletar Produto",
+        description = "Deleta o Produto cadastrado com o ID informado"
+    )
 @DeleteMapping("/{id}")
    public ResponseEntity<Void> delete(@PathVariable Long id) {
 
@@ -73,6 +102,10 @@ public class ProdutoController {
        return ResponseEntity.ok().build();
    }
 
+
+    @Operation(
+         summary = "Filtrar Produtos",
+         description = "Retorna uma lista de Produtos filtrados pelos parâmetros informados")
      @PostMapping("/filtrar")
    public List<Produto> filtrar(
            @RequestParam(value = "codigo", required = false) String codigo,

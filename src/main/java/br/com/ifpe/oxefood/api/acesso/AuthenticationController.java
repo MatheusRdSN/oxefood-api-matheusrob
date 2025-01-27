@@ -13,6 +13,12 @@ import br.com.ifpe.oxefood.modelo.acesso.Usuario;
 import br.com.ifpe.oxefood.modelo.acesso.UsuarioService;
 import br.com.ifpe.oxefood.modelo.seguranca.JwtService;
 
+import io.swagger.v3.oas.annotations.Operation; 
+
+@Tag(
+    name = "API Autenticação",
+    description = "API responsável pelos serviços de Autenticação no sistema"
+)
 @RestController
 @RequestMapping("/api/auth")
 @CrossOrigin
@@ -28,6 +34,10 @@ public class AuthenticationController {
         this.usuarioService = usuarioService;
     }
 
+    @Operation(
+        summary = "Autenticação de Usuário",
+        description = "Realiza a autenticação do usuário e retorna o token JWT"
+    )
     // essa função é responsável por autenticar o usuário e gerar o token JWT, esse map faz o papel de um objeto JSON
     @PostMapping
     public Map<Object, Object> signin(@RequestBody AuthenticationRequest data) {

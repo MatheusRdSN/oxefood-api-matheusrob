@@ -18,6 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.ifpe.oxefood.modelo.categoriaProduto.CategoriaProduto;
 import br.com.ifpe.oxefood.modelo.categoriaProduto.CategoriaProdutoService;
 
+import io.swagger.v3.oas.annotations.Operation;
+
+@Tag(
+    name = "API Categoria de Produto",
+    description = "API responsável pelos servidos de Categoria de Produto no sistema"
+)
 @RestController //determina que essa classe e do tipo Rest
 @RequestMapping("/api/categoriaproduto") //DETERMINA A URL para acesar as funçoes essa classe
 @CrossOrigin //recber requisiçoes javascript
@@ -27,6 +33,10 @@ public class CategoriaProdutoController {
  @Autowired
    private CategoriaProdutoService categoriaProdutoService;
 
+    @Operation(
+         summary = "Cadastrar Categoria de Produto",
+         description = "Realiza o cadastro de uma nova Categoria de Produto"
+    )
    @PostMapping //pra acessar essa funçao tem que fazer requisiçoes POST
    public ResponseEntity<CategoriaProduto> save(@RequestBody CategoriaProdutoRequest request) {
 
@@ -34,16 +44,26 @@ public class CategoriaProdutoController {
        return new ResponseEntity<CategoriaProduto>(categoriaProduto, HttpStatus.CREATED);
    }
 
+    @Operation(
+         summary = "Listar todas as Categorias de Produto",
+         description = "Retorna uma lista com todas as Categorias de Produto cadastradas")
        @GetMapping 
     public List<CategoriaProduto> listarTodos() {
         return categoriaProdutoService.listarTodos();
     }
 
+    @Operation(
+         summary = "Obter Categoria de Produto por ID",
+         description = "Retorna a Categoria de Produto cadastrada com o ID informado"
+    )
     @GetMapping("/{id}")
     public CategoriaProduto obterPorID(@PathVariable Long id) {
         return categoriaProdutoService.obterPorID(id);
     }
 
+    @Operation(
+         summary = "Atualizar Categoria de Produto",
+         description = "Atualiza a Categoria de Produto cadastrada com o ID informado")
      @PutMapping("/{id}") 
  public ResponseEntity<CategoriaProduto> update(@PathVariable("id") Long id, @RequestBody CategoriaProdutoRequest request) {
 
@@ -51,6 +71,10 @@ public class CategoriaProdutoController {
        return ResponseEntity.ok().build();
  }
 
+    @Operation(
+         summary = "Deletar Categoria de Produto",
+         description = "Deleta a Categoria de Produto cadastrada com o ID informado"
+    )
  @DeleteMapping("/{id}")
    public ResponseEntity<Void> delete(@PathVariable Long id) {
 
