@@ -1,13 +1,26 @@
 version: "3"
 services:
 
-   db:
+  db:
      image: postgres:9.6
      restart: always
      environment:
-       POSTGRES_PASSWORD: oxefood
-       POSTGRES_DB: oxefood
+       POSTGRES_PASSWORD: ${PASS_DB}
+       POSTGRES_DB: ${NAME_DB}
      ports:
-       - 5436:5432
+       - ${PORT_DB}:5432
      volumes:
        - ./postgres-data:/bitnami/postgresql/data
+
+  #  db:
+  #    image: postgres:9.6
+  #    restart: always
+  #    environment:
+  #      POSTGRES_PASSWORD: oxefood
+  #      POSTGRES_DB: oxefood
+  #    ports:
+  #      - 5436:5432
+  #    volumes:
+  #      - ./postgres-data:/bitnami/postgresql/data
+
+    
