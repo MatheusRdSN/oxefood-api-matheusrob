@@ -20,6 +20,7 @@ import br.com.ifpe.oxefood.modelo.entregador.EntregadorService;
 import jakarta.validation.Valid;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController //determina que essa classe e do tipo Rest
 @RequestMapping("/api/entregador") //DETERMINA A URL para acesar as funçoes essa classe

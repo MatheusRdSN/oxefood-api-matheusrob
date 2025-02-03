@@ -23,6 +23,7 @@ import br.com.ifpe.oxefood.modelo.funcionario.TipoFuncionario;
 import jakarta.validation.Valid;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/api/funcionario")

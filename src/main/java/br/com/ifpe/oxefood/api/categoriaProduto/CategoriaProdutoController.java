@@ -19,6 +19,7 @@ import br.com.ifpe.oxefood.modelo.categoriaProduto.CategoriaProduto;
 import br.com.ifpe.oxefood.modelo.categoriaProduto.CategoriaProdutoService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(
     name = "API Categoria de Produto",

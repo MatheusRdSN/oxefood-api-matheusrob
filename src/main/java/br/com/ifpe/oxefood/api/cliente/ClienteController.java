@@ -23,6 +23,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController //determina que essa classe e do tipo Rest
 @RequestMapping("/api/cliente") //DETERMINA A URL para acesar as funçoes dessa classe

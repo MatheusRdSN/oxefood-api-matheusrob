@@ -13,7 +13,8 @@ import br.com.ifpe.oxefood.modelo.acesso.Usuario;
 import br.com.ifpe.oxefood.modelo.acesso.UsuarioService;
 import br.com.ifpe.oxefood.modelo.seguranca.JwtService;
 
-import io.swagger.v3.oas.annotations.Operation; 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag; 
 
 @Tag(
     name = "API Autenticação",

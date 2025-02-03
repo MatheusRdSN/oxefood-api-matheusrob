@@ -22,6 +22,7 @@ import br.com.ifpe.oxefood.modelo.produto.ProdutoService;
 import jakarta.validation.Valid;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Tag(
     name = "API Produto",
