@@ -24,17 +24,14 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController //determina que essa classe e do tipo Rest
 @RequestMapping("/api/entregador") //DETERMINA A URL para acesar as funçoes essa classe
-@CrossOrigin //recber requisiçoes javascript
+@CrossOrigin //receber requisiçoes javascript
 @Tag(
     name = "API Entregador",
     description = "API responsável pelos servidos de Entregador no sistema"
 )
-
-//DEFINE AS ROTAS 
-
 public class EntregadorController {
     
-    @Autowired
+   @Autowired // 
    private EntregadorService entregadorService;
 
     @Operation(
