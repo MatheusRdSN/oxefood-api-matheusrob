@@ -3,8 +3,7 @@ package br.com.ifpe.oxefood.api.produto;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-
-
+import jakarta.validation.constraints.NotNull;
 import br.com.ifpe.oxefood.modelo.produto.Produto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,9 +24,10 @@ public class ProdutoRequest {
 
     private String descricao;
 
-    @NotBlank(message = "O Valor é de preenchimento obrigatório")
+    
     @Min(value = 20, message = "O valor unitário deve ser no mínimo 20")
-    @Max(value = 100, message = "O valor unitário deve ser no máximo 100")
+    @Max(value = 200, message = "O valor unitário deve ser no máximo 100")
+    @NotNull(message = "O Valor é de preenchimento obrigatório")
     private Double valorUnitario;
 
     private Integer tempoEntregaMinimo;

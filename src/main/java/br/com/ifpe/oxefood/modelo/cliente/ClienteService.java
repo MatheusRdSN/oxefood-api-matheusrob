@@ -52,7 +52,7 @@ public class ClienteService {
         cliente.setHabilitado(Boolean.TRUE);
         Cliente clienteSalvo = repository.save(cliente);
 
-        emailService.enviarEmailConfirmacaoCadastroCliente(clienteSalvo);
+       // emailService.enviarEmailConfirmacaoCadastroCliente(clienteSalvo);
 
         return clienteSalvo;
 
