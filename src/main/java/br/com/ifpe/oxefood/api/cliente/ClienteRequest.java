@@ -23,8 +23,8 @@ import lombok.NoArgsConstructor;
 
 
 @Data // Mesma coisa que getters e setters juntos.
-@Builder
-@NoArgsConstructor
+@Builder // Cria um objeto ClienteRequest.
+@NoArgsConstructor 
 @AllArgsConstructor
 public class ClienteRequest {
 
@@ -58,6 +58,7 @@ public class ClienteRequest {
         return foneCelular != null && foneCelular.startsWith("(81");
     }
 
+    // Método que cria um objeto Usuario.
     public Usuario buildUsuario() {
        return Usuario.builder()
            .username(email)

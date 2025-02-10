@@ -15,7 +15,7 @@ import br.com.ifpe.oxefood.util.exception.ClienteException;
 
 import jakarta.transaction.Transactional;
 
-@Service
+@Service // Indica que a classe é um bean (bean é uma classe Java que possui um construtor sem argumentos e métodos getters e setters) ) do Spring, que significa que é gerenciada pelo Spring..
 public class ClienteService {
     @Autowired // cria instâncias automaticamente
     private ClienteRepository repository;
@@ -34,7 +34,7 @@ public class ClienteService {
 
 
 
-    @Transactional // orgazina
+    @Transactional // Indica que o método será executado dentro de uma transação de banco de dados organizada pelo Spring para garantir a integridade dos dados.
     public Cliente save(Cliente cliente, Usuario usuarioLogado) {
 
          usuarioService.save(cliente.getUsuario());
@@ -58,6 +58,7 @@ public class ClienteService {
 
     }
 
+    // Método que lista todos os clientes.
     public List<Cliente> listarTodos() {
   
         return repository.findAll();

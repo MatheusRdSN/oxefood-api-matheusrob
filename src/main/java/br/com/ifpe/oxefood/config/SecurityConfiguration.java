@@ -20,8 +20,8 @@ import br.com.ifpe.oxefood.modelo.acesso.Perfil;
 import br.com.ifpe.oxefood.modelo.acesso.Usuario;
 import br.com.ifpe.oxefood.modelo.seguranca.JwtAuthenticationFilter;
 
-@Configuration
-@EnableWebSecurity
+@Configuration // @Configuration é uma anotação que indica que a classe é uma classe de configuração
+@EnableWebSecurity // @EnableWebSecurity é uma anotação que habilita a segurança web no projeto
 public class SecurityConfiguration {
 
     private final AuthenticationProvider authenticationProvider;
@@ -34,7 +34,7 @@ public class SecurityConfiguration {
 
     // a classe SecurityFilterChain controla a permissão de acesso aos endpoints/rotas, liberando as rotas publicas e protegendo as privadas
     
-    @Bean
+    @Bean // @Bean é uma anotação que indica que o método anotado irá retornar um objeto que deve ser gerenciado pelo Spring
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
@@ -49,7 +49,7 @@ public class SecurityConfiguration {
                 .requestMatchers(HttpMethod.POST, "/api/funcionario").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/auth").permitAll()
                 // caso uma rota receba parametros como /api/cliente/{id}, o uso de * é necessário, ficando: /api/cliente/*
-                // pode permitir rotas do mesmo tipo de requisição em uma mesma linha de codigo, como "/api/cliente", "/api/cproduto/*"
+                // pode permitir rotas do mesmo tipo de requisição em uma mesma linha de codigo, como "/api/cliente", "/api/produto/*"
 
                 .requestMatchers(HttpMethod.GET, "/api/produto/").hasAnyAuthority(
                    Perfil.ROLE_CLIENTE,
@@ -74,9 +74,11 @@ public class SecurityConfiguration {
                 .anyRequest().authenticated()
 
             )
+            // .sessionManagement() define a politica de gerenciamento de sessão, no caso, STATELESS não mantem estado de sessão
             .sessionManagement((session) -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            )            
+            )         
+            // .addFilterBefore() adiciona um filtro antes de outro filtro, no caso, antes do filtro de autenticação   
             .authenticationProvider(authenticationProvider)
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 

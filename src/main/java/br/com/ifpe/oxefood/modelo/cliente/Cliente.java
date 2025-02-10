@@ -30,14 +30,14 @@ import java.util.List;
 @Table(name = "Cliente") // Nome da tabela no banco de dados.
 @SQLRestriction("habilitado = true") // Restrição para mostrar apenas os clientes habilitados.
 @Builder // Cria um objeto Cliente.
-@Getter
-@Setter
+@Getter // Gera os métodos getters.
+@Setter // Gera os métodos setters.
 @AllArgsConstructor // Cria um construtor com todos os atributos.
 @NoArgsConstructor // Cria um construtor vazio.
 public class Cliente extends EntidadeAuditavel {
 
-   @OneToOne
-   @JoinColumn(nullable = false)
+   @OneToOne 
+   @JoinColumn(nullable = false) 
    private Usuario usuario;
 
 
@@ -45,10 +45,10 @@ public class Cliente extends EntidadeAuditavel {
    @Fetch(FetchMode.SUBSELECT) // Carrega todos os endereços do cliente.
    private List<EnderecoCliente> enderecos; // Lista de endereços do cliente.
 
-   @Column (nullable = false, length = 100)
+   @Column (nullable = false, length = 100) 
    private String nome;
 
-   @Column
+   @Column // Coluna no banco de dados.
    @JsonFormat(pattern = "dd/MM/yyyy")
    private LocalDate dataNascimento;
 
